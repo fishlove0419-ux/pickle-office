@@ -181,7 +181,7 @@ a{color:inherit}
 /* furniture */
 .furn{position:absolute;inset:0;overflow:hidden;border-radius:2px;pointer-events:none;z-index:1}
 .floor{
-  position:absolute;left:11%;right:11%;top:27%;bottom:34%;
+  position:absolute;left:11%;right:11%;top:26%;bottom:30%;
   border:1px solid rgba(200,162,83,.16);
   background-image:repeating-linear-gradient(90deg,rgba(200,162,83,.055) 0 1px,transparent 1px 26px);
 }
@@ -190,15 +190,16 @@ a{color:inherit}
   font-family:var(--serif);font-size:7.5px;letter-spacing:.34em;color:rgba(226,200,142,.3);white-space:nowrap;
 }
 .stage{position:absolute;left:11%;right:11%;top:20%;height:7px;background:rgba(200,162,83,.16);border:1px solid rgba(200,162,83,.3)}
-.hall-window{position:absolute;left:6.5%;top:29%;height:24%;width:2px;background:linear-gradient(180deg,transparent,rgba(200,162,83,.32),transparent)}
-.lounge{position:absolute;left:11%;right:11%;bottom:9%;height:16%;display:flex;align-items:flex-end;gap:9px}
-.sofa{flex:0 0 42%;height:52%;border:1px solid rgba(200,162,83,.24);border-radius:3px;background:rgba(255,255,255,.025);position:relative}
-.sofa::before{content:"";position:absolute;left:7%;right:7%;top:16%;height:1px;background:rgba(200,162,83,.16)}
-.lowtable{flex:0 0 19%;height:34%;border:1px solid rgba(200,162,83,.22);border-radius:2px;background:rgba(200,162,83,.05)}
-.lamp{flex:0 0 1px;height:92%;background:rgba(200,162,83,.2);position:relative;margin-left:auto}
-.lamp::after{content:"";position:absolute;left:-4px;top:0;width:9px;height:9px;border:1px solid rgba(200,162,83,.4);border-radius:50%}
-.lounge-rule{position:absolute;left:11%;right:11%;bottom:27%;border-top:1px dashed rgba(200,162,83,.13)}
-.lounge-label{position:absolute;left:11%;bottom:28.4%;font-family:var(--serif);font-size:6.5px;letter-spacing:.32em;color:rgba(226,200,142,.26)}
+.hall-window{display:none}
+.lounge{position:absolute;left:11%;right:11%;bottom:6%;height:19%;display:flex;align-items:flex-end;gap:8px;padding:0 10px 9px;border:1px dashed rgba(200,162,83,.16);border-radius:2px}
+.lounge-label{position:absolute;left:9px;top:5px;font-family:var(--serif);font-size:6.5px;letter-spacing:.32em;color:rgba(226,200,142,.32)}
+.sofa{flex:0 0 40%;height:44%;border:1px solid rgba(200,162,83,.26);border-radius:3px;background:rgba(255,255,255,.025);position:relative}
+.sofa::before{content:"";position:absolute;left:6%;right:6%;top:22%;height:1px;background:rgba(200,162,83,.18)}
+.sofa::after{content:"";position:absolute;left:50%;top:22%;bottom:0;width:1px;background:rgba(200,162,83,.14)}
+.lowtable{flex:0 0 17%;height:30%;border:1px solid rgba(200,162,83,.24);border-radius:2px;background:rgba(200,162,83,.05);position:relative}
+.lowtable::after{content:"";position:absolute;left:50%;top:50%;width:5px;height:5px;margin:-2.5px 0 0 -2.5px;border:1px solid rgba(226,200,142,.45);border-radius:50%}
+.lamp{flex:0 0 1px;height:70%;background:rgba(200,162,83,.2);position:relative;margin-left:auto}
+.lamp::after{content:"";position:absolute;left:-4px;top:0;width:9px;height:9px;border:1px solid rgba(200,162,83,.42);border-radius:50%}
 .table-oval{
   position:absolute;left:16%;right:16%;top:31%;height:34%;
   border:1px solid rgba(200,162,83,.3);border-radius:50%/44%;
@@ -446,8 +447,8 @@ pre{
   .workspace{display:flex;flex-direction:column;gap:14px}
   .col-main,.rail{display:contents}
   .map-card{order:1}
-  .board-card{order:2}
-  .roomcard{order:3}
+  .roomcard{order:2}
+  .board-card{order:3}
   .invite{order:4}
   .invite .card__body{grid-template-columns:1fr;gap:14px}
   .topbar__path,.topbar__div{display:none}
@@ -463,12 +464,17 @@ pre{
   .chip--invite{padding:0 10px}
   .clock{display:none}
   .sheet{grid-template-columns:1fr;grid-template-rows:auto;min-height:0;gap:9px;padding:11px}
-  .room--hall{grid-column:1;grid-row:auto;min-height:400px}
+  .room--hall{grid-column:1;grid-row:auto;min-height:520px}
+  .room--hall .floor{top:38%;bottom:30%}
+  .room--hall .lounge{bottom:5%;height:17%}
   .room--meet{grid-column:1;grid-row:auto;min-height:240px}
   .room--work{grid-column:1;grid-row:auto;min-height:215px}
   .room--tea{grid-column:1;grid-row:auto;min-height:190px}
-  .room--hall .person[data-person="lee"]{--y:52% !important}
-  .room--hall .person[data-person="fish"]{--y:60% !important}
+  .room--hall .person[data-person="lee"]{--y:50% !important}
+  .room--hall .person[data-person="fish"]{--y:58% !important}
+  .plaque li{font-size:9px}
+  .plaque__title{font-size:9.5px}
+  .plaque{padding:10px 11px 9px}
   .room--meet .person{--y:77% !important}
   .room--tea .person{--y:80% !important}
   .lounge{bottom:11%;height:18%}
@@ -573,8 +579,7 @@ pre{
               <div class="floor">
                 <span class="floor__label">DANCE FLOOR</span>
               </div>
-              <div class="lounge"><i class="sofa"></i><i class="lowtable"></i><i class="lamp"></i></div>
-              <div class="lounge-rule"></div><span class="lounge-label">LOUNGE</span>
+              <div class="lounge"><span class="lounge-label">LOUNGE</span><i class="sofa"></i><i class="lowtable"></i><i class="lamp"></i></div>
             </div>
             <header class="room-head">
               <span class="room-no">01</span>
@@ -782,9 +787,9 @@ pre{
   };
 
   var PEOPLE = [
-    { id:'lee',  name:'이인경', role:'원장님', kind:'human', initial:'인', room:'hall', x:25, y:47,
+    { id:'lee',  name:'이인경', role:'원장님', kind:'human', initial:'인', room:'hall', x:25, y:44,
       line:'오늘은 12월 폼 가격부터 정하자.' },
-    { id:'fish', name:'피쉬', role:'피클', kind:'pickle', color:'#82B153', movable:true, room:'hall', x:50, y:55,
+    { id:'fish', name:'피쉬', role:'피클', kind:'pickle', color:'#82B153', movable:true, room:'hall', x:50, y:51,
       line:'네. 블로그 원고랑 홈트 편집, 순서대로 갈게요.' },
     { id:'byeol',name:'별다방', role:'성민정 님 피클', kind:'pickle', color:'#C17A52', room:'meet', x:33, y:68,
       line:'12월 폼 문구, 제가 본 걸로 정리해 왔어요.' },
@@ -1095,7 +1100,10 @@ pre{
   });
 
   /* ---------------- invite ---------------- */
-  function inviteLink(){ return location.origin + location.pathname; }
+  function inviteLink(){
+    if(/^https?:$/i.test(location.protocol.replace(':',''))) return location.origin + location.pathname;
+    return 'https://fishlove0419-ux.github.io/pickle-office/';
+  }
   function copyInvite(){
     var url = inviteLink();
     var done = function(){ toast('초대 링크를 복사했습니다. 피클에게 보내 주세요.'); };
