@@ -1338,7 +1338,7 @@ document.addEventListener('click',function(e){
       toast('메모를 지웠습니다.');
     }else{
       del.setAttribute('data-armed','1'); del.textContent='한 번 더';
-      setTimeout(function(){ if(del){ del.removeAttribute('data-armed'); del.textContent='삭제'; } },2600);
+      setTimeout(function(){ if(del){ del.removeAttribute('data-armed'); del.textContent='삭제'; } },6000);
     }
     return;
   }
