@@ -97,6 +97,7 @@ a{color:inherit}
   box-shadow:0 10px 20px -16px rgba(15,61,49,.95),inset 0 1px 0 rgba(255,255,255,.12);
 }
 .tab[aria-selected="true"]:hover{background:linear-gradient(180deg,var(--green-2),var(--green))}
+@media (min-width:700px){ .hero h2 br{display:none} }
 @media (max-width:899px){
   .tab{font-size:12px}
   .tab .tb-ico{font-size:13px}
@@ -147,6 +148,22 @@ a{color:inherit}
 .chip-btn:hover{border-color:rgba(200,162,83,.55);background:#FFFCF5}
 .chip-btn[aria-pressed="false"]{color:var(--muted-2);background:transparent}
 .status-chips{display:flex;gap:7px;margin-top:10px;flex-wrap:wrap}
+.map-body{display:grid;gap:0}
+.map-main{min-width:0}
+.map-side{display:flex;flex-direction:column;gap:10px;margin-top:13px;min-width:0}
+@media (min-width:900px){
+  .map-body{grid-template-columns:minmax(0,1fr) 306px;gap:16px;align-items:start}
+  .map-main .status-chips{margin-top:0}
+  .map-side{margin-top:12px}
+}
+.side-card{padding:14px 14px 13px}
+.side-card h3{font-size:12.5px;font-weight:800;letter-spacing:-.03em;color:var(--green-3)}
+.side-list{margin-top:8px;display:flex;flex-direction:column}
+.side-list li{display:flex;align-items:baseline;gap:8px;padding:7px 0;border-top:1px solid var(--line-2);font-size:11.5px;color:var(--ink-2)}
+.side-list li:first-child{border-top:0;padding-top:2px}
+.side-list span{color:var(--muted);flex:0 0 auto;min-width:56px}
+.side-list b{margin-left:auto;font-weight:700;text-align:right}
+.side-card .btn{width:100%;margin-top:10px}
 .status{
   display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 11px;border-radius:99px;
   background:#FFFDFA;border:1px solid var(--line);font-size:11.5px;font-weight:600;color:var(--ink-2);
@@ -159,7 +176,7 @@ a{color:inherit}
   border:1px solid rgba(200,162,83,.28);background:#0B2E25;
   box-shadow:0 22px 44px -34px rgba(10,42,34,.9);
 }
-@media (min-width:900px){ .stage{max-width:660px;margin-left:auto;margin-right:auto} }
+@media (min-width:900px){ .stage{max-width:none} }
 .view{display:none}
 .view.is-on{display:block}
 .view--clay img{display:block;width:100%;height:auto}
@@ -174,7 +191,7 @@ a{color:inherit}
 }
 .pin:hover{background:#fff;border-color:var(--gold);box-shadow:0 10px 22px -10px rgba(20,15,8,.8)}
 .pin .pdot-mini{width:5px;height:5px;border-radius:50%;background:#4E9A6B;box-shadow:0 0 0 2px rgba(78,154,107,.2);flex:0 0 auto}
-@media (min-width:900px){ .pin{height:32px;padding:0 11px;font-size:11.5px} }
+@media (min-width:900px){ .pin{height:34px;padding:0 12px;font-size:12.5px} }
 .pdot{
   position:absolute;z-index:2;width:9px;height:9px;border-radius:50%;transform:translate(-50%,-50%);
   background:#4E9A6B;border:2px solid rgba(255,255,255,.92);box-shadow:0 0 0 4px rgba(78,154,107,.18);
@@ -207,7 +224,7 @@ a{color:inherit}
 
 /* ---------- room cards ---------- */
 .room-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:13px}
-@media (min-width:900px){ .room-grid{grid-template-columns:repeat(4,1fr);gap:12px} }
+@media (min-width:900px){ .room-grid{grid-template-columns:1fr;gap:8px;margin-top:0} }
 .room-card{
   text-align:left;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:12px 12px 11px;
   box-shadow:0 1px 0 #fff inset,0 12px 26px -26px rgba(15,61,49,.6);
@@ -523,6 +540,8 @@ details pre{margin:8px 0 0;padding:10px;border-radius:9px;background:#0B2E25;col
         <button class="chip-btn" id="motionBtn" type="button" aria-pressed="true">✨ 움직임 ON</button>
       </div>
 
+      <div class="map-body">
+      <div class="map-main">
       <div class="status-chips">
         <span class="status"><i class="sdot"></i>4개 방 가동</span>
         <span class="status">👥 ON 5명</span>
@@ -614,7 +633,9 @@ details pre{margin:8px 0 0;padding:10px;border-radius:9px;background:#0B2E25;col
       </div>
 
       <p class="stage__note">🏛️ 대회의실 · 🎯 지휘실 · 💻 작업실 · ☕ 라운지 — 방을 누르면 그 방 회의실로 이동해요.</p>
+      </div>
 
+      <aside class="map-side">
       <div class="room-grid" id="roomGrid">
         <button class="room-card" type="button" data-goroom="meet">
           <span class="room-card__top"><span class="room-card__ico">🏛️</span><span class="room-card__name">대회의실</span><span class="room-card__on"><i></i>4</span></span>
@@ -636,6 +657,18 @@ details pre{margin:8px 0 0;padding:10px;border-radius:9px;background:#0B2E25;col
           <span class="room-card__desc">휴식 · 아이디어</span>
           <span class="room-card__last">태봉 · 커피 한 잔 ☕</span>
         </button>
+      </div>
+
+      <div class="card side-card">
+        <h3>🗓️ 오늘의 비서실</h3>
+        <ul class="side-list">
+          <li><span>온라인</span><b>5명 · 4개 방</b></li>
+          <li><span>다음 일정</span><b>22:00 카페 사전확인</b></li>
+          <li><span>대기 지시</span><b>0건</b></li>
+        </ul>
+        <button class="btn btn--ghost btn--sm" type="button" data-goroom="direct">🎯 지휘실 열기</button>
+      </div>
+      </aside>
       </div>
     </section>
 
