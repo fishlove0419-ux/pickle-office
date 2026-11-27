@@ -99,6 +99,8 @@ a{color:inherit}
 .tab[aria-selected="true"]:hover{background:linear-gradient(180deg,var(--green-2),var(--green))}
 @media (min-width:700px){ .hero h2 br{display:none} }
 @media (max-width:899px){
+  html{scrollbar-width:none}
+  html::-webkit-scrollbar,body::-webkit-scrollbar{width:0;height:0}
   .tab{font-size:12px}
   .tab .tb-ico{font-size:13px}
 }
@@ -551,15 +553,15 @@ details pre{margin:8px 0 0;padding:10px;border-radius:9px;background:#0B2E25;col
       <div class="stage is-motion" id="stage">
         <div class="view view--clay is-on" id="viewClay">
           <img src="office-clay.png" alt="엘땅고 비서실 클레이 3D 오피스 — 왼쪽 대회의실, 안쪽 지휘실, 가운데 작업실, 오른쪽 아래 라운지" width="1000" height="1250" fetchpriority="high">
-          <button class="pin" type="button" data-goroom="meet" style="left:25%;top:49%">🏛️ 대회의실<i class="pdot-mini"></i></button>
-          <button class="pin" type="button" data-goroom="direct" style="left:47%;top:36%">🎯 지휘실<i class="pdot-mini"></i></button>
-          <button class="pin" type="button" data-goroom="work" style="left:46%;top:70%">💻 작업실<i class="pdot-mini"></i></button>
-          <button class="pin" type="button" data-goroom="lounge" style="left:73%;top:82%">☕ 라운지<i class="pdot-mini"></i></button>
-          <i class="pdot" style="left:44%;top:27%" aria-hidden="true"></i>
-          <i class="pdot" style="left:70%;top:40%" aria-hidden="true"></i>
-          <i class="pdot" style="left:53%;top:60%" aria-hidden="true"></i>
-          <i class="pdot" style="left:74%;top:61%" aria-hidden="true"></i>
-          <i class="pdot" style="left:15%;top:45%" aria-hidden="true"></i>
+          <button class="pin" type="button" data-goroom="meet" style="left:24%;top:50%">🏛️ 대회의실<i class="pdot-mini"></i></button>
+          <button class="pin" type="button" data-goroom="direct" style="left:46%;top:40%">🎯 지휘실<i class="pdot-mini"></i></button>
+          <button class="pin" type="button" data-goroom="work" style="left:43%;top:74%">💻 작업실<i class="pdot-mini"></i></button>
+          <button class="pin" type="button" data-goroom="lounge" style="left:70%;top:88%">☕ 라운지<i class="pdot-mini"></i></button>
+          <i class="pdot" style="left:44%;top:28%" aria-hidden="true"></i>
+          <i class="pdot" style="left:70%;top:45%" aria-hidden="true"></i>
+          <i class="pdot" style="left:52%;top:64%" aria-hidden="true"></i>
+          <i class="pdot" style="left:73%;top:70%" aria-hidden="true"></i>
+          <i class="pdot" style="left:14%;top:43%" aria-hidden="true"></i>
         </div>
 
         <div class="view view--plan" id="viewPlan">
