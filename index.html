@@ -682,7 +682,7 @@ details pre{margin:8px 0 0;padding:10px;border-radius:9px;background:#0B2E25;col
         <h3>🗓️ 오늘의 비서실</h3>
         <ul class="side-list">
           <li><span>온라인</span><b>5명 · 4개 방</b></li>
-          <li><span>다음 일정</span><b>22:00 카페 사전확인</b></li>
+          <li><span>다음 일정</span><b>22:00 · 카페 사전확인</b></li>
           <li><span>대기 지시</span><b>0건</b></li>
         </ul>
         <button class="btn btn--ghost btn--sm" type="button" data-goroom="direct">🎯 지휘실 열기</button>
@@ -917,7 +917,7 @@ details pre{margin:8px 0 0;padding:10px;border-radius:9px;background:#0B2E25;col
       <code id="inviteUrl">https://fishlove0419-ux.github.io/pickle-office/</code>
       <button class="btn btn--ghost btn--sm" type="button" id="copyInvite">복사</button>
     </div>
-    <p class="modal__foot">저장 위치: <b>office/tasks</b> · <b>office/chat</b> · <b>office/notes</b><br>공개 페이지에 규칙을 열어 두면 누구나 쓸 수 있으니, 실제 운영 전에는 인증 규칙을 걸어 주세요.</p>
+    <p class="modal__foot">저장 위치: <b>office/board</b> · <b>office/chat</b> · <b>office/notes</b><br>공개 페이지에 규칙을 열어 두면 누구나 쓸 수 있으니, 실제 운영 전에는 인증 규칙을 걸어 주세요.</p>
   </div>
 </div>
 
@@ -1046,7 +1046,8 @@ function persist(){
 var pushTimers={tasks:null,chat:null,notes:null};
 var es=null;
 function dbUrl(){ return (localStorage.getItem(LS_DB)||'').replace(/\/+$/,'') }
-function pathUrl(key){ return dbUrl()+'/office/'+key+'.json' }
+function dbKey(k){ return k==='tasks'?'board':k }
+function pathUrl(key){ return dbUrl()+'/office/'+dbKey(key)+'.json' }
 function setConn(mode,msg){
   var btn=$('#connBtn'), txt=$('#connTxt');
   btn.setAttribute('data-mode',mode);
@@ -1083,8 +1084,9 @@ function schedulePush(key){
 function applyRemote(office){
   if(!office||typeof office!=='object') return;
   var changed=false;
-  if(office.tasks!==undefined && !pushTimers.tasks){
-    var t=normList(office.tasks);
+  var tasksRaw = office.board!==undefined ? office.board : office.tasks;
+  if(tasksRaw!==undefined && !pushTimers.tasks){
+    var t=normList(tasksRaw);
     if(t.length && JSON.stringify(t)!==JSON.stringify(state.tasks)){ state.tasks=t; changed=true; }
   }
   if(office.notes!==undefined && !pushTimers.notes){
@@ -1109,6 +1111,7 @@ function openStream(){
     if(m.path==='/'||m.path===''){ applyRemote(m.data); }
     else{
       var key=String(m.path).replace(/^\//,'');
+      if(key==='board') key='tasks';
       if(key==='tasks'||key==='chat'||key==='notes'){
         var o={}; o[key]=m.data; applyRemote(o);
       }
@@ -1131,7 +1134,7 @@ function connect(url,quiet){
   fetch(url+'/office.json',{cache:'no-store'})
     .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
     .then(function(data){
-      if(data&&typeof data==='object'){ applyRemote(data); if(!data.tasks) pushKey('tasks'); if(!data.chat) pushKey('chat'); if(!data.notes) pushKey('notes'); }
+      if(data&&typeof data==='object'){ applyRemote(data); if(!data.board) pushKey('tasks'); if(!data.chat) pushKey('chat'); if(!data.notes) pushKey('notes'); }
       else { pushKey('tasks'); pushKey('chat'); pushKey('notes'); }
       setConn('live');
       openStream();
