@@ -21,7 +21,7 @@
   m.addEventListener('load',function(){
     if(s) m.contentWindow.scrollTo(0, parseFloat(s));
   });
-  m.src='./index.html#'+t;
+  m.src='./index.html?v='+encodeURIComponent(p.get('v')||'0')+'#'+t;
 </script>
 </body>
 </html>
