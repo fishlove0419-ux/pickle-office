@@ -15,9 +15,13 @@
   var p=new URLSearchParams(location.search);
   var t=p.get('t')||'map';
   var z=p.get('z');
+  var s=p.get('s');
   var m=document.getElementById('m');
-  m.src='./index.html#'+t;
   if(z) m.style.zoom=z;
+  m.addEventListener('load',function(){
+    if(s) m.contentWindow.scrollTo(0, parseFloat(s));
+  });
+  m.src='./index.html#'+t;
 </script>
 </body>
 </html>
