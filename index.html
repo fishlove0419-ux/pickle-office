@@ -1006,13 +1006,29 @@ var state={room:'direct', sender:'wonjang', filter:'all', view:'clay', motion:tr
 
 /* ---------------- storage ---------------- */
 var OLD_MEMBER='\uBCC4\uB2E4\uBC29'; /* 옛 버전 저장값에 남은 이전 멤버 표기 — 화면에 다시 나오지 않게 정리 */
+/* 이전 버전 예시 문구를 지금 멤버 기준 문구로 정리 */
+var LEGACY_TEXT={
+  '네, 원장님! 플레이스·당근 쪽도 똑같이 진행하겠습니다 ☕':'네, 원장님! 협력 업무도 똑같이 진행하겠습니다 🌷',
+  '플레이스 대표사진·키워드 2차 교체 마쳤습니다. 캡처는 작업실 보드에 올려뒀어요.':'12월 원데이 체험반 현장 진행표 정리해서 작업실 보드에 올려뒀습니다.'
+};
+var LEGACY_TASK={
+  '네니아 인터뷰 릴스 자막 교정본 반영':['서울탱고위크 2026 게스트 안내 문자 초안 확인','행사'],
+  '네이버 플레이스 대표사진·키워드 2차 교체':['12월 원데이 체험반 현장 진행표 공유','현장']
+};
+function tidyText(s){
+  s=s.split(OLD_MEMBER).join('네니아');
+  return LEGACY_TEXT[s]||s;
+}
 function refreshName(x){
-  var old=OLD_MEMBER;
   if(!x||typeof x!=='object') return x;
   if(x.who&&x.who!=='wonjang'&&!PEOPLE[x.who]) x.who='nenia';
   if(x.owner&&!PEOPLE[x.owner]) x.owner='nenia';
-  if(typeof x.text==='string') x.text=x.text.split(old).join('네니아');
-  if(typeof x.title==='string') x.title=x.title.split(old).join('네니아');
+  if(typeof x.text==='string') x.text=tidyText(x.text);
+  if(typeof x.title==='string'){
+    var t=tidyText(x.title), m=LEGACY_TASK[t];
+    x.title=m?m[0]:t;
+    if(m) x.tag=m[1];
+  }
   return x;
 }
 function normChat(src){
